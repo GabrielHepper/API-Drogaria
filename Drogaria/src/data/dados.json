@@ -1,0 +1,36 @@
+{
+  "Medicamento": [
+    {
+      "id": 1,
+      "nome_medicamento": "Emoprazol",
+      "nome_fabricante": "Tenuace",
+      "preco": 16.30,
+      "quantidade": 23
+    }
+  ],
+  "Cliente": [
+    {
+      "id": "",
+      "nome": "",
+      "endereco": "",
+      "email": "",
+      "telefone": ""
+    }
+  ],
+  "Fornecedor": [
+    {
+      "id": "",
+      "nome": "",
+      "endereco": "",
+      "telefone": ""
+    }
+  ],
+  "Venda": [
+    {
+      "id": "",
+      "data": "",
+      "id_medicamento": "",
+      "id_cliente": ""
+    }
+  ]
+}
