@@ -1,14 +1,12 @@
 const express = require('express');
 const fornecedor = express(); 
-const dados = require('./data/dados.json');
+const dados = require('./data/dadosFornecedores.json');
 const fs = require('fs');
 fornecedor.use(express.json());
-fornecedor.listen(3002, () => {
-    console.log('Fornecedor está funcionando!');
-});
+
 
 fornecedor.post('/fornecedores', (req, res) => {
-    const novoFornecedor = req.body;
+    const novoFornecedor = req.body;    
 
     if (!novoFornecedor.id || !novoFornecedor.nome || !novoFornecedor.endereco || !novoFornecedor.telefone) {
         return res.status(400).json({ mensagem: 'Dados incompletos, tente novamente' });
@@ -49,5 +47,7 @@ fornecedor.delete('/fornecedores/:id', (req, res) => {
 });
 
 function salvarDados(dados) {
-    fs.writeFileSync(__dirname + '/../data/dados.json', JSON.stringify(dados, null, 2));
+    fs.writeFileSync(__dirname + './data/dadosFornecedores.json', JSON.stringify(dados, null, 2));
 }
+
+module.exports = {fornecedor, salvarDados}

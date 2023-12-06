@@ -3,9 +3,7 @@ const venda = express();
 const dados = require('./data/dados.json');
 const fs = require('fs');
 venda.use(express.json());
-venda.listen(3003, () => {
-    console.log('Venda está funcionando!');
-});
+
 
 venda.post('/vendas', (req, res) => {
     const novaVenda = req.body;

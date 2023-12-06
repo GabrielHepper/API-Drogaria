@@ -3,12 +3,8 @@ const medicamento = express();
 const dados = require('./data/dados.json');
 const fs = require("fs")
 medicamento.use(express.json());
-medicamento.get('/', (req, res) => {
-return res.json({mensagem: 'Nossa API está funcionando'});
-});
-medicamento.listen(3000, () =>{
-console.log("Servidor está funcionando!");
-});
+
+
 
 
 // Rota para salvar/inserir dados no JSON (equivalente ao "Create" do CRUD)
