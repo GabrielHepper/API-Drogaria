@@ -1,9 +1,8 @@
 const express = require('express');
-const venda = express(); 
+const venda = express();
 const dados = require('./data/dados.json');
 const fs = require('fs');
 venda.use(express.json());
-
 
 venda.post('/vendas', (req, res) => {
     const novaVenda = req.body;
@@ -13,39 +12,33 @@ venda.post('/vendas', (req, res) => {
     } else {
         dados.Venda.push(novaVenda);
         salvarDados(dados);
-        return res.status(201).json({ mensagem: 'Nova venda cadastrada com sucesso.' });
+        const vendaId = novaVenda.id; // Obtendo o ID da nova venda
+        const links = {
+            self: { href: `/vendas/${vendaId}` },
+            update: { href: `/vendas/${vendaId}/update` },
+            delete: { href: `/vendas/${vendaId}/delete` }
+        };
+        return res.status(201).json({ mensagem: 'Nova venda cadastrada com sucesso.', _links: links });
     }
 });
 
 venda.get('/vendas', (req, res) => {
-    return res.json(dados.Venda);
+    const vendasComLinks = dados.Venda.map((venda) => {
+        const vendaId = venda.id;
+        const links = {
+            self: { href: `/vendas/${vendaId}` },
+            update: { href: `/vendas/${vendaId}/update` },
+            delete: { href: `/vendas/${vendaId}/delete` }
+        };
+        return { ...venda, _links: links };
+    });
+
+    return res.json(vendasComLinks);
 });
 
-venda.put('/vendas/:id', (req, res) => {
-    const vendaID = parseInt(req.params.id);
-    const atualizarVenda = req.body;
-    const idVenda = dados.Venda.findIndex((v) => v.id === vendaID);
-
-    if (idVenda === -1) {
-        return res.status(404).json({ mensagem: 'Venda não encontrada :/' });
-    } else {
-        dados.Venda[idVenda].data = atualizarVenda.data || dados.Venda[idVenda].data;
-        dados.Venda[idVenda].id_medicamento = atualizarVenda.id_medicamento || dados.Venda[idVenda].id_medicamento;
-        dados.Venda[idVenda].id_cliente = atualizarVenda.id_cliente || dados.Venda[idVenda].id_cliente;
-
-        salvarDados(dados);
-
-        return res.json({ mensagem: 'Venda atualizada com sucesso.' });
-    }
-});
-
-venda.delete('/vendas/:id', (req, res) => {
-    const vendaID = parseInt(req.params.id);
-    dados.Venda = dados.Venda.filter((v) => v.id !== vendaID);
-    salvarDados(dados);
-    return res.status(200).json({ mensagem: 'Venda excluída com sucesso!' });
-});
 
 function salvarDados(dados) {
     fs.writeFileSync(__dirname + '/../data/dados.json', JSON.stringify(dados, null, 2));
 }
+
+module.exports = venda;

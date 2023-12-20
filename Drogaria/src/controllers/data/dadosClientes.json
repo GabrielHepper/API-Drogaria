@@ -1,88 +1,21 @@
 {
-  "Cliente": [
-    {
-      "id": 1,
-      "nome": "Teste",
-      "endereco": "Teste",
-      "email": "Teste",
-      "Telefone": 123
+  "id": 1,
+  "nome": "Cliente A",
+  "endereco": "Rua X, 123",
+  "email": "clienteA@email.com",
+  "telefone": "123456789",
+  "_links": {
+    "self": {
+      "href": "/api/clientes/1"
     },
-    {
-      "id": "2",
-      "nome": "Teste Dois",
-      "endereco": "1234",
-      "email": "teste@gmail.com",
-      "telefone": "12345"
+    "update": {
+      "href": "/api/clientes/1/atualizar"
     },
-    {
-      "id": "3",
-      "nome": "Teste Tres",
-      "endereco": "alo",
-      "email": "teste@teste.com",
-      "telefone": "1092830921"
+    "delete": {
+      "href": "/api/clientes/1/excluir"
     },
-    {
-      "id": "1",
-      "nome": "ffft",
-      "endereco": "ftft",
-      "email": "ftfttf",
-      "telefone": "24323"
-    },
-    {
-      "id": "1",
-      "nome": "erer",
-      "endereco": "werwe",
-      "email": "werwer",
-      "telefone": "1231"
-    },
-    {
-      "id": "1",
-      "nome": "erer",
-      "endereco": "werwe",
-      "email": "werwer",
-      "telefone": "1231"
-    },
-    {
-      "id": "1",
-      "nome": "erer",
-      "endereco": "werwe",
-      "email": "werwer",
-      "telefone": "1231"
-    },
-    {
-      "id": "1",
-      "nome": "erer",
-      "endereco": "werwe",
-      "email": "werwer",
-      "telefone": "1231"
-    },
-    {
-      "id": "1",
-      "nome": "erer",
-      "endereco": "werwe",
-      "email": "werwer",
-      "telefone": "1231"
-    },
-    {
-      "id": "1",
-      "nome": "erer",
-      "endereco": "werwe",
-      "email": "werwer",
-      "telefone": "1231"
-    },
-    {
-      "id": "1",
-      "nome": "erer",
-      "endereco": "werwe",
-      "email": "werwer",
-      "telefone": "1231"
-    },
-    {
-      "id": "1",
-      "nome": "erer",
-      "endereco": "werwe",
-      "email": "werwer",
-      "telefone": "1231"
+    "collection": {
+      "href": "/api/clientes"
     }
-  ]
+  }
 }

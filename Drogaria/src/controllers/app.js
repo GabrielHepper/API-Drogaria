@@ -14,7 +14,7 @@ server.use(express.json())
 server.use(cors())
 
 server.use('/api', clientesRouter.server)
-server.use('/api', fornecedorRouter.fornecedor)
+//server.use('/api', fornecedorRouter.fornecedor)
 // server.use('/api', medicamentoRouter.server)
 // server.use('/api', vendaRouter.server)
 

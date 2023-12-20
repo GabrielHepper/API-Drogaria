@@ -1,53 +1,42 @@
 const express = require('express');
-const fornecedor = express(); 
-const dados = require('./data/dadosFornecedores.json');
+const server = express();
+const dadosFornecedores = require('./data/dadosFornecedores.json');
 const fs = require('fs');
-fornecedor.use(express.json());
 
+server.use(express.json());
 
-fornecedor.post('/fornecedores', (req, res) => {
-    const novoFornecedor = req.body;    
+server.post('/fornecedores', (req, res) => {
+    const novoFornecedor = req.body;
 
-    if (!novoFornecedor.id || !novoFornecedor.nome || !novoFornecedor.endereco || !novoFornecedor.telefone) {
-        return res.status(400).json({ mensagem: 'Dados incompletos, tente novamente' });
+    if (!novoFornecedor.nome || !novoFornecedor.endereco || !novoFornecedor.email || !novoFornecedor.telefone) {
+        return res.status(400).json({ mensagem: "Dados incompletos, tente novamente" });
     } else {
-        dados.Fornecedor.push(novoFornecedor);
-        salvarDados(dados);
-        return res.status(201).json({ mensagem: 'Novo fornecedor cadastrado com sucesso.' });
+        dadosFornecedores.Fornecedor.push(novoFornecedor);
+        salvarDados(dadosFornecedores);
+        const fornecedorComLinks = adicionarLinksAoFornecedor(novoFornecedor);
+        return res.status(201).json(fornecedorComLinks);
     }
 });
 
-fornecedor.get('/fornecedores', (req, res) => {
-    return res.json(dados.Fornecedor);
+server.get('/fornecedores', (req, res) => {
+    const fornecedoresComLinks = dadosFornecedores.Fornecedor.map(fornecedor => adicionarLinksAoFornecedor(fornecedor));
+    return res.json(fornecedoresComLinks);
 });
 
-fornecedor.put('/fornecedores/:id', (req, res) => {
-    const fornecedorID = parseInt(req.params.id);
-    const atualizarFornecedor = req.body;
-    const idFornecedor = dados.Fornecedor.findIndex((f) => f.id === fornecedorID);
 
-    if (idFornecedor === -1) {
-        return res.status(404).json({ mensagem: 'Fornecedor não encontrado :/' });
-    } else {
-        dados.Fornecedor[idFornecedor].nome = atualizarFornecedor.nome || dados.Fornecedor[idFornecedor].nome;
-        dados.Fornecedor[idFornecedor].endereco = atualizarFornecedor.endereco || dados.Fornecedor[idFornecedor].endereco;
-        dados.Fornecedor[idFornecedor].telefone = atualizarFornecedor.telefone || dados.Fornecedor[idFornecedor].telefone;
-
-        salvarDados(dados);
-
-        return res.json({ mensagem: 'Fornecedor atualizado com sucesso.' });
-    }
-});
-
-fornecedor.delete('/fornecedores/:id', (req, res) => {
-    const fornecedorID = parseInt(req.params.id);
-    dados.Fornecedor = dados.Fornecedor.filter((f) => f.id !== fornecedorID);
-    salvarDados(dados);
-    return res.status(200).json({ mensagem: 'Fornecedor excluído com sucesso!' });
-});
-
-function salvarDados(dados) {
-    fs.writeFileSync(__dirname + './data/dadosFornecedores.json', JSON.stringify(dados, null, 2));
+function adicionarLinksAoFornecedor(fornecedor) {
+    return {
+        ...fornecedor,
+        _links: {
+            self: { href: `/fornecedores/${fornecedor.id}` },
+            update: { href: `/fornecedores/${fornecedor.id}/update` },
+            delete: { href: `/fornecedores/${fornecedor.id}/delete` }
+        }
+    };
 }
 
-module.exports = {fornecedor, salvarDados}
+function salvarDados() {
+    fs.writeFileSync(__dirname + '/data/dadosFornecedores.json', JSON.stringify(dadosFornecedores, null, 2));
+}
+
+module.exports = { server, salvarDados };

@@ -33,7 +33,7 @@ server.put('/clientes/:id', (req, res) => {
     const atualizaCliente = req.body
 
     //encontrar o id no json que já existe
-    const idCliente = dadosClientes.Cliente.findIndex(u => u.id === usuarioId)
+    const idCliente = dadosClientes.Cliente.findIndex(u => u.id === clienteId)
 
     if (idCliente === -1) {
         return res.status(404).json({mensagem: "Usuário não encontrado :/"})
@@ -57,7 +57,7 @@ server.put('/clientes/:id', (req, res) => {
 server.delete("/clientes/:id", (req, res) => {
     const clienteId = parseInt(req.params.id)
 
-    dadosClientes.Clientes = dadosClientes.Clientes.filter(u => u.id !== usuarioId)
+    dadosClientes.Cliente = dadosClientes.Cliente.filter(u => u.id !== clienteId)
 
     salvarDados(dadosClientes)
 
