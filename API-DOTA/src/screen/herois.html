@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Heróis</title>
+    <link rel="stylesheet" href="herois.css" />
+  </head>
+  <body id="body">
+    <h1>Gerenciar Heróis</h1>
+    <h2>Adicionar Herói</h2>
+    <form id="formHeroi">
+      <label for="idHeroi">ID: </label>
+      <input type="number" id="idHeroi" name="idHeroi" required />
+
+      <label for="nomeHeroi">Nome: </label>
+      <input type="text" id="nomeHeroi" name="nomeHeroi" required />
+
+      <label for="habilidade1">habilidade1: </label>
+      <input type="text" id="habilidade1" name="habilidade1" required />
+
+      <label for="habilidade2">habilidade2: </label>
+      <input type="text" id="habilidade2" name="habilidade2" required />
+
+      <label for="habilidade3">habilidade3: </label>
+      <input type="text" id="habilidade3" name="habilidade3" required />
+
+      <label for="foto">Foto: </label>
+      <input type="file" id="foto" name="foto" accept="image/*" required />
+
+      <label for="resumo">Resumo: </label>
+      <input type="text" id="resumo" name="resumo" />
+
+      <button type="button" onclick="adicionarHeroi()">Adicionar</button>
+    </form>
+
+    <h2>Listar Heróis</h2>
+    <ul id="listaHerois"></ul>
+
+    <form id="formDetalhesHerois">
+      <div><img src="../assets/left-arrow.png" onclick="voltar()" /></div>
+
+      <label for="habilidade1">habilidade1: </label>
+      <input type="text" id="habilidade1" name="habilidade1" required />
+
+      <label for="habilidade2">habilidade2: </label>
+      <input type="text" id="habilidade2" name="habilidade2" required />
+
+      <label for="habilidade3">habilidade3: </label>
+      <input type="text" id="habilidade3" name="habilidade3" required />
+
+      <button type="button" onclick="atualizarHerois()">Atualizar</button>
+    </form>
+
+    <script src="../herois/herois.js"></script>
+  </body>
+</html>

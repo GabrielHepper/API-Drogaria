@@ -14,7 +14,7 @@ function adicionarCliente() {
     const email = document.getElementById('emailCliente').value;
     const telefone = document.getElementById('telefoneCliente').value;
 
-    fetch('http://localhost:3000/api/clientes', {
+    fetch('http://localhost:3001/api/clientes', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -36,7 +36,7 @@ function adicionarCliente() {
 }
 
 function loadClientesList() {
-    fetch('http://localhost:3000/api/clientes')
+    fetch('http://localhost:3001/api/clientes')
         .then(response => response.json())
         .then(data => displayClientesList(data))
         .catch(error => console.error(error));
@@ -48,7 +48,7 @@ function displayClientesList(data) {
 
     data.forEach(cliente => {
         const listItem = document.createElement('li');
-
+        
         listItem.innerHTML = `
             ID: ${cliente.id} - Nome: ${cliente.nome} - Endereço: ${cliente.endereco} - Email: ${cliente.email} - Telefone: ${cliente.telefone}
             <ul>
@@ -63,7 +63,7 @@ function displayClientesList(data) {
 }
 
 function excluirCliente(id) {
-    fetch(`http://localhost:3000//clientes/${id}`, {
+    fetch(`http://localhost:3001//clientes/${id}`, {
         method: 'DELETE'
     })
     .then(response => response.json())

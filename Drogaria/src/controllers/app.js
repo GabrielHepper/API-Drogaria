@@ -20,6 +20,6 @@ server.use('/api', clientesRouter.server)
 
 
 // mensagem no terminal para indicar o funcionamento
-server.listen(3000, () =>{
+server.listen(3001, () =>{
     console.log(`O servidor está funcionando! :D`);
 })

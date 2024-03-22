@@ -1,0 +1,13 @@
+{
+  "herois": [
+    {
+      "id": "4",
+      "nome": "werwe",
+      "habilidade1": "Gelo",
+      "habilidade2": "Gelo 2",
+      "habilidade3": "Gelo meio quente",
+      "foto": "../assets/Lina.jpg",
+      "resumo": "fgfgf"
+    }
+  ]
+}
